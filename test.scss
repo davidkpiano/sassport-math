@@ -1,0 +1,6 @@
+@import 'math';
+
+.test {
+  golden: $PHI;
+  sin: math-sin(45deg);
+}

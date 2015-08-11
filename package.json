@@ -1,0 +1,30 @@
+{
+  "name": "sassport-math",
+  "version": "0.0.1",
+  "description": "A collection of math functions for Sass via Sassport.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidkpiano/sassport-math.git"
+  },
+  "keywords": [
+    "sassport",
+    "sass",
+    "math"
+  ],
+  "author": "David Khourshid <davidkpiano@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidkpiano/sassport-math/issues"
+  },
+  "homepage": "https://github.com/davidkpiano/sassport-math#readme",
+  "dependencies": {
+    "mathjs": "^2.0.1",
+    "node-sass": "^3.2.0",
+    "node-sass-utils": "^1.1.1",
+    "sassport": "^0.1.1"
+  }
+}
