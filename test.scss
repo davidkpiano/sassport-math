@@ -1,6 +1,8 @@
 @import 'math';
 
 .test {
-  golden: $PHI;
-  sin: math-sin(45deg);
+math-abs: math-abs(3.5);                // returns number 3.5
+math-abs: math-abs(-4.2);               // returns number 4.2
+
+math-abs: math-abs(3 -5 -1 0 2);  // returns Array [3, 5, 1, 0, 2]
 }

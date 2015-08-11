@@ -2,6 +2,7 @@ var sassport = require('sassport');
 var math = require('mathjs');
 var sass = require('node-sass');
 var sassUtils = require('node-sass-utils')(sass);
+var _ = require('lodash');
 
 function sassportMathWrapper(mathFunc) {
   return function(args, done) {
@@ -14,26 +15,30 @@ function sassportMathWrapper(mathFunc) {
       sassArgs[i] = args.getValue(i);
     }
 
-    sassArgs.forEach(function(sassValue, index) {
-      var value = sassUtils.castToJs(sassValue);
-
-      if (sassUtils.typeOf(sassValue) === 'number') {
-        try {
-          // Attempt to use the provided Sass unit
-          value = math.unit(sassValue.getValue(), sassValue.getUnit());
-        } catch (e) {
-          // Use the unitless value
-          value = sassValue.getValue();
-        }
-      }
-
-      jsArgs[index] = value;
-    });
+    jsArgs = _.map(sassArgs, mathUnit);
 
     result = mathFunc.apply(math, jsArgs);
 
     return sassUtils.castToSass(result);
   }
+}
+
+function mathUnit(sassValue) {
+  var value = sassUtils.castToJs(sassValue);
+
+  if (sassUtils.typeOf(sassValue) === 'number') {
+    try {
+      // Attempt to use the provided Sass unit
+      value = math.unit(sassValue.getValue(), sassValue.getUnit());
+    } catch (e) {
+      // Use the unitless value
+      value = sassValue.getValue();
+    }
+  } else {
+    value = _.pluck(value, 'value');
+  }
+
+  return value;
 }
 
 function isFunction(value) {
